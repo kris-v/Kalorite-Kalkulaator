@@ -90,12 +90,16 @@ def kuva_graafika():
                 # Toitumiskava genereerimine ja kuvamine
                 if toitumis_kava_combo.get() == "jah":
                     toitumiskava = planeeri_toitumine(kalorid)
-                    toitumiskava_text.config(state="normal")  # Tee tekst muutmiseks kättesaadavaks
-                    toitumiskava_text.delete("1.0", tk.END)  # Puhasta eelmine tekst
+                    toitumiskava_text.config(state="normal")
+                    toitumiskava_text.delete("1.0", tk.END)
                     toitumiskava_text.insert(tk.END, "Teie toitumiskava:\n")
                     for toit, kogus in toitumiskava:
                         toitumiskava_text.insert(tk.END, f"{toit}: {kogus:.2f} g\n")
-                    toitumiskava_text.config(state="disabled")  # Tee tekst uuesti kirjutuskaitstuks
+                    toitumiskava_text.config(state="disabled")
+                    toitumiskava_text.grid() # tekst nähtavaks
+                else:
+                    toitumiskava_text.grid_remove() # teksti ära kustutamine
+
         except ValueError:
             tulemus_label.config(text="Vigased andmed!")
 
@@ -143,7 +147,7 @@ def kuva_graafika():
     eesmärk_combo.grid(row=5, column=1, padx=5, pady=5)
 
     # Toitumiskava valik
-    toitumis_kava_label = ttk.Label(aken, text="Kas soovid toitumis kava?:")
+    toitumis_kava_label = ttk.Label(aken, text="Kas soovid toitumiskava?:")
     toitumis_kava_label.grid(row=6, column=0, padx=5, pady=5)
     toitumis_kava_combo = ttk.Combobox(aken, values=["jah", "ei"])
     toitumis_kava_combo.grid(row=6, column=1, padx=5, pady=5)
@@ -156,8 +160,10 @@ def kuva_graafika():
     tulemus_label.grid(row=8, column=0, columnspan=2, padx=5, pady=5)
 
     # Toitumiskava kuvamine
-    toitumiskava_text = tk.Text(aken, state="disabled")  # Alguses on tekst kirjutuskaitstud
+    toitumiskava_text = tk.Text(aken, state="disabled")
+    # Alguses on tekst peidetud
     toitumiskava_text.grid(row=9, column=0, columnspan=2, padx=5, pady=5)
+    toitumiskava_text.grid_remove() 
 
     aken.mainloop()
 
