@@ -34,6 +34,8 @@ def arvuta_kalorid(vanus, sugu, kaal, pikkus, aktiivsus, eesmärk):
         kalorid -= 500
     elif eesmärk == "kaalutõus":
         kalorid += 500
+    elif eesmärk == "kaalu säilitamine":
+        kalorid -= 0
     else:
         return "Eesmärk peab olema 'kaalulangus', 'kaalutõus' või 'kaalu säilitamine'."
 
