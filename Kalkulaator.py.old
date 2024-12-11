@@ -93,7 +93,7 @@ def kuva_graafika():
                 )
 
                 # Toitumiskava genereerimine ja kuvamine
-                if toitumis_kava_combo.get() == "jah":
+                if toitumis_kava_var.get():
                     toitumiskava = planeeri_toitumine(kalorid)
                     toitumiskava_text.config(state="normal")
                     toitumiskava_text.delete("1.0", tk.END)
@@ -154,8 +154,9 @@ def kuva_graafika():
     # Toitumiskava valik
     toitumis_kava_label = ttk.Label(aken, text="Kas soovid toitumiskava?:")
     toitumis_kava_label.grid(row=6, column=0, padx=5, pady=5)
-    toitumis_kava_combo = ttk.Combobox(aken, values=["jah", "ei"])
-    toitumis_kava_combo.grid(row=6, column=1, padx=5, pady=5)
+    toitumis_kava_var = tk.BooleanVar()
+    toitumis_kava_check = ttk.Checkbutton(aken, variable=toitumis_kava_var, text="jah")
+    toitumis_kava_check.grid(row=6, column=1, padx=5, pady=5)
 
     arvuta_nupp = ttk.Button(aken, text="Arvuta", command=arvuta)
     arvuta_nupp.grid(row=7, column=0, columnspan=2, padx=5, pady=5)
