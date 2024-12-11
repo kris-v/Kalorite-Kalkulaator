@@ -1,27 +1,27 @@
-Leib,250
-Sai,290
-Piim (2,5%),50
-Kohv (must, ilma suhkruta),2
-Must tee (ilma suhkruta),1
-Juust,350
-Vorst,300
-Või,720
-Muna,155
-Suhkur,400
-Müsli,370
-Kartul,85
-Makaronid (keedetud),110
-Värske kurk,15
-Värske tomat,20
-Marineeritud kurk,30
-Marineeritud kapsas,20
-Šokolaad,530
-Riis,130
-Tatar,340
-Seamaks,135
-Rõskkoor,200
-Praetud muna,200
-Viinerid,270
-Peekon,500
-Uba tomatikastmes,90
-Jäätis,200
+Leib-250
+Sai-290
+Piim (2,5%)-50
+Kohv (must, ilma suhkruta)-2
+Must tee (ilma suhkruta)-1
+Juust-350
+Vorst-300
+Või-720
+Muna-155
+Suhkur-400
+Müsli-370
+Kartul-85
+Makaronid (keedetud)-110
+Värske kurk-15
+Värske tomat-20
+Marineeritud kurk-30
+Marineeritud kapsas-20
+Šokolaad-530
+Riis-130
+Tatar-340
+Seamaks-135
+Rõskkoor-200
+Praetud muna-200
+Viinerid-270
+Peekon-500
+Uba tomatikastmes-90
+Jäätis-200
