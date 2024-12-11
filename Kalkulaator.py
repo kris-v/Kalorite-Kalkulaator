@@ -2,7 +2,9 @@ import random
 import tkinter as tk
 from tkinter import ttk
 
-# Funktsioon kalorite arvutamiseks
+
+#Peab tegema toitumise veel!
+
 def arvuta_kalorid(vanus, sugu, kaal, pikkus, aktiivsus, eesmärk):
 
 
