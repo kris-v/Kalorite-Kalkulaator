@@ -53,7 +53,7 @@ def planeeri_toitumine(kalorid):
     toiduained = {}
     with open("toidud.txt", "r", encoding="utf-8") as f:
         for rida in f:
-            toit, kalorsus = rida.strip().split(",")
+            toit, kalorsus = rida.strip().split("-")
             toiduained[toit] = int(kalorsus)
 
     toitumiskava = []
