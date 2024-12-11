@@ -180,5 +180,3 @@ def kuva_graafika():
 # Graafika
 if __name__ == "__main__":
     kuva_graafika()
-
-
