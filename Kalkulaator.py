@@ -4,7 +4,6 @@ from tkinter import ttk
 
 
 def arvuta_kalorid(vanus, sugu, kaal, pikkus, aktiivsus, eesmärk):
-    """Arvutab päevase kalorikulu."""
 
     # Arvuta BMR vastavalt soole
     if sugu == "mees":
