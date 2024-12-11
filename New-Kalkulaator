@@ -13,7 +13,7 @@ Kas Tahad, et ma helistan jõusaali treenerile, et aidata sul seda langetada?"""
         
     if pikkus >= 99999:
         arv_pikkus = pikkus / 100
-        return "Pikkus: " + str(arv_pikkus) + " m. Kas oled mõõtnud oma pikkust või üritanud püüdnud mõõta Munamäge?"
+        return "Teie pikkus: " + str(arv_pikkus) + " m. Kas olete mõõtnud oma pikkust või üritanud püüdnud mõõta Munamäe kõrgust?"
         brake
         
     if vanus >= 999:
