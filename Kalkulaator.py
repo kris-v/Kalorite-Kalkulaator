@@ -5,7 +5,7 @@ from tkinter import ttk
 
 def arvuta_kalorid(vanus, sugu, kaal, pikkus, aktiivsus, eesmärk):
 
-    # Arvuta BMR vastavalt soole
+    # Arvutab BMR vastavalt soole
     if sugu == "mees":
         bmr = 88.36 + (13.4 * kaal) + (4.8 * pikkus) - (5.7 * vanus)
     elif sugu == "naine":
