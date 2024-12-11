@@ -1,12 +1,11 @@
+
 import random
 import tkinter as tk
 from tkinter import ttk
 
 
-#Peab tegema toitumise veel!
-
 def arvuta_kalorid(vanus, sugu, kaal, pikkus, aktiivsus, eesmärk):
-
+    """Arvutab päevase kalorikulu."""
 
     # Arvuta BMR vastavalt soole
     if sugu == "mees":
@@ -16,7 +15,7 @@ def arvuta_kalorid(vanus, sugu, kaal, pikkus, aktiivsus, eesmärk):
     else:
         return "Sugu peab olema 'mees' või 'naine'."
 
-    # Määra aktiivsustegur
+    # Määra aktiivsus
     if aktiivsus == "istuv":
         aktiivsustegur = 1.2
     elif aktiivsus == "väike":
@@ -36,12 +35,17 @@ def arvuta_kalorid(vanus, sugu, kaal, pikkus, aktiivsus, eesmärk):
         kalorid -= 500
     elif eesmärk == "kaalutõus":
         kalorid += 500
+    else:
+        return "Eesmärk peab olema 'kaalulangus', 'kaalutõus' või 'kaalu säilitamine'."
 
     valgud_kalorid = kalorid * 0.25
     rasvad_kalorid = kalorid * 0.3
     süsivesikud_kalorid = kalorid * 0.45
 
     return kalorid, valgud_kalorid, rasvad_kalorid, süsivesikud_kalorid
+    
+
+
 
 def planeeri_toitumine(kalorid):
 
@@ -62,46 +66,11 @@ def planeeri_toitumine(kalorid):
 
     return toitumiskava
 
-def main():
-    """Kalorite kalkulaatori põhiprogramm."""
-
-    valik = input("Kas soovite jätkata arvutamist? (jah/ei): ")
-    if valik.lower() != "jah":
-        return
-
-    vanus = int(input("Sisestage oma vanus (aastad): "))
-    sugu = input("Sisestage oma sugu (mees/naine): ").lower()
-    kaal = float(input("Sisestage oma kaal (kg): "))
-    pikkus = float(input("Sisestage oma pikkus (cm): "))
-    aktiivsus = input(
-        "Sisestage oma aktiivsuse tase (istuv/väike/mõõdukas/kõrge/väga kõrge): "
-    ).lower()
-    eesmärk = input("Sisestage oma eesmärk (kaalulangus/kaalutõus/kaalu säilitamine): ").lower()
-
-    tulemused = arvuta_kalorid(vanus, sugu, kaal, pikkus, aktiivsus, eesmärk)
-
-    if isinstance(tulemused, str):
-        print(tulemused)
-    else:
-        kalorid, valgud_kalorid, rasvad_kalorid, süsivesikud_kalorid = tulemused
-        print(f"Teie päevane kalorikulu on: {kalorid:.2f} kcal")
-        print(f"Valgud: {valgud_kalorid:.2f} kcal")
-        print(f"Rasvad: {rasvad_kalorid:.2f} kcal")
-        print(f"Süsivesikud: {süsivesikud_kalorid:.2f} kcal")
-
-        valik = input("Kas soovite toitumiskava? (jah/ei): ")
-        if valik.lower() == "jah":
-            toitumiskava = planeeri_toitumine(kalorid)
-
-            print("Teie toitumiskava:")
-            for toit, kogus in toitumiskava:
-                print(f"{toit}: {kogus:.2f} g")
 
 def kuva_graafika():
-    """Kuvab graafilise kasutajaliidese."""
+    #Kuvab graafilise kasutajaliidese.
 
     def arvuta():
-        """Arvutab kalorid ja kuvab tulemused."""
         try:
             vanus = int(vanus_entry.get())
             sugu = sugu_combo.get()
@@ -122,6 +91,20 @@ def kuva_graafika():
                     f"Rasvad: {rasvad_kalorid:.2f} kcal\n"
                     f"Süsivesikud: {süsivesikud_kalorid:.2f} kcal"
                 )
+
+                # Toitumiskava genereerimine ja kuvamine
+                if toitumis_kava_combo.get() == "jah":
+                    toitumiskava = planeeri_toitumine(kalorid)
+                    toitumiskava_text.config(state="normal")
+                    toitumiskava_text.delete("1.0", tk.END)
+                    toitumiskava_text.insert(tk.END, "Teie toitumiskava:\n")
+                    for toit, kogus in toitumiskava:
+                        toitumiskava_text.insert(tk.END, f"{toit}: {kogus:.2f} g\n")
+                    toitumiskava_text.config(state="disabled")
+                    toitumiskava_text.grid() # tekst nähtavaks
+                else:
+                    toitumiskava_text.grid_remove() # teksti ära kustutamine
+
         except ValueError:
             tulemus_label.config(text="Vigased andmed!")
 
@@ -168,21 +151,28 @@ def kuva_graafika():
     )
     eesmärk_combo.grid(row=5, column=1, padx=5, pady=5)
 
-    arvuta_nupp = ttk.Button(aken, text="Arvuta", command=arvuta)
-    arvuta_nupp.grid(row=7, column=0, columnspan=2, padx=5, pady=5)
-
-    #Toitumis kava
-    toitumis_kava_label = ttk.Label(aken, text="Kas soovid toitumis kava?:")
+    # Toitumiskava valik
+    toitumis_kava_label = ttk.Label(aken, text="Kas soovid toitumiskava?:")
     toitumis_kava_label.grid(row=6, column=0, padx=5, pady=5)
     toitumis_kava_combo = ttk.Combobox(aken, values=["jah", "ei"])
     toitumis_kava_combo.grid(row=6, column=1, padx=5, pady=5)
+
+    arvuta_nupp = ttk.Button(aken, text="Arvuta", command=arvuta)
+    arvuta_nupp.grid(row=7, column=0, columnspan=2, padx=5, pady=5)
 
     # Tulemus
     tulemus_label = ttk.Label(aken, text="")
     tulemus_label.grid(row=8, column=0, columnspan=2, padx=5, pady=5)
 
+    # Toitumiskava kuvamine
+    toitumiskava_text = tk.Text(aken, state="disabled")
+    # Alguses on tekst peidetud
+    toitumiskava_text.grid(row=9, column=0, columnspan=2, padx=5, pady=5)
+    toitumiskava_text.grid_remove() 
+
     aken.mainloop()
 
-# Graafika
+
 if __name__ == "__main__":
     kuva_graafika()
+
