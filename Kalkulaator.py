@@ -123,7 +123,7 @@ def kuva_graafika():
                     f"Süsivesikud: {süsivesikud_kalorid:.2f} kcal"
                 )
         except ValueError:
-            tulemus_label.config(text="Vigased sisendandmed!")
+            tulemus_label.config(text="Vigased andmed!")
 
     aken = tk.Tk()
     aken.title("Kalorite kalkulaator")
@@ -169,11 +169,17 @@ def kuva_graafika():
     eesmärk_combo.grid(row=5, column=1, padx=5, pady=5)
 
     arvuta_nupp = ttk.Button(aken, text="Arvuta", command=arvuta)
-    arvuta_nupp.grid(row=6, column=0, columnspan=2, padx=5, pady=5)
+    arvuta_nupp.grid(row=7, column=0, columnspan=2, padx=5, pady=5)
+
+    #Toitumis kava
+    toitumis_kava_label = ttk.Label(aken, text="Kas soovid toitumis kava?:")
+    toitumis_kava_label.grid(row=6, column=0, padx=5, pady=5)
+    toitumis_kava_combo = ttk.Combobox(aken, values=["jah", "ei"])
+    toitumis_kava_combo.grid(row=6, column=1, padx=5, pady=5)
 
     # Tulemus
     tulemus_label = ttk.Label(aken, text="")
-    tulemus_label.grid(row=7, column=0, columnspan=2, padx=5, pady=5)
+    tulemus_label.grid(row=8, column=0, columnspan=2, padx=5, pady=5)
 
     aken.mainloop()
 
