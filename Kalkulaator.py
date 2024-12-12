@@ -5,7 +5,7 @@ from tkinter import ttk
 
 def arvuta_kalorid(vanus, sugu, kaal, pikkus, aktiivsus, eesmärk):
     
-    #Peatab koodi ettearvamatutes olukordades.
+    # Peatab koodi ettearvamatutes olukordades.
     if kaal > 99999:
         return """Sinu kaal on suurem, kui minu lootused elus.
 Kas Tahad, et ma helistan jõusaali treenerile, et aidata sul seda langetada?"""
@@ -15,7 +15,7 @@ Kas Tahad, et ma helistan jõusaali treenerile, et aidata sul seda langetada?"""
         
     if pikkus > 99999:
         arv_pikkus = pikkus / 100
-        return "Teie pikkus: " + str(arv_pikkus) + " m. Kas olete mõõtnud oma pikkust või üritanud püüdnud mõõta Munamäe kõrgust?"
+        return "Teie pikkus: " + str(arv_pikkus) + " m. Kas olete mõõtnud oma pikkust või üritanud mõõta Munamäe kõrgust?"
         
     if pikkus < 1:
         return "Olete liiga lühike."
@@ -35,7 +35,7 @@ Kas Tahad, et ma helistan jõusaali treenerile, et aidata sul seda langetada?"""
     else:
         return "Sugu peab olema 'mees' või 'naine'."
 
-    # Määra aktiivsus
+    # Määrab aktiivsuse
     if aktiivsus == "istuv":
         aktiivsustegur = 1.2
     elif aktiivsus == "väike":
@@ -71,7 +71,7 @@ Kas Tahad, et ma helistan jõusaali treenerile, et aidata sul seda langetada?"""
 
 
 def planeeri_toitumine(kalorid):
-
+    # Arvutab toiduained toitumiskavasse
     toiduained = {}
     with open("toidud.txt", "r", encoding="utf-8") as f:
         for rida in f:
@@ -91,9 +91,10 @@ def planeeri_toitumine(kalorid):
 
 
 def kuva_graafika():
-    #Kuvab graafilise kasutajaliidese.
+    # Kuvab graafilise kasutajaliidese.
 
     def arvuta():
+        # Arvutab valgud, rasvad ja süsivesikud
         try:
             vanus = int(vanus_entry.get())
             sugu = sugu_combo.get()
