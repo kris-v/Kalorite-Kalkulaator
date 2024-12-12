@@ -4,7 +4,29 @@ from tkinter import ttk
 
 
 def arvuta_kalorid(vanus, sugu, kaal, pikkus, aktiivsus, eesmärk):
-
+    
+    #Peatab koodi ettearvamatutes olukordades.
+    if kaal > 99999:
+        return """Sinu kaal on suurem, kui minu lootused elus.
+Kas Tahad, et ma helistan jõusaali treenerile, et aidata sul seda langetada?"""
+        
+    if kaal < 1:
+        return "Liiga väike number kaalus."
+        
+    if pikkus > 99999:
+        arv_pikkus = pikkus / 100
+        return "Teie pikkus: " + str(arv_pikkus) + " m. Kas olete mõõtnud oma pikkust või üritanud püüdnud mõõta Munamäe kõrgust?"
+        
+    if pikkus < 1:
+        return "Olete liiga lühike."
+        
+        
+    if vanus > 999:
+        return "Teie vanus on nii suur, et isegi kalendri lehed hakkavad kartma!"
+        
+    if vanus < 1:
+        return "Olete liiga noor selle programmi kasutuseks."
+    
     # Arvutab BMR vastavalt soole
     if sugu == "mees":
         bmr = 88.36 + (13.4 * kaal) + (4.8 * pikkus) - (5.7 * vanus)
@@ -37,6 +59,7 @@ def arvuta_kalorid(vanus, sugu, kaal, pikkus, aktiivsus, eesmärk):
         kalorid -= 0
     else:
         return "Eesmärk peab olema 'kaalulangus', 'kaalutõus' või 'kaalu säilitamine'."
+    
 
     valgud_kalorid = kalorid * 0.25
     rasvad_kalorid = kalorid * 0.3
@@ -102,6 +125,7 @@ def kuva_graafika():
                         toitumiskava_text.insert(tk.END, f"{toit}: {kogus:.2f} g\n")
                     toitumiskava_text.config(state="disabled")
                     toitumiskava_text.grid() # tekst nähtavaks
+                    
                 else:
                     toitumiskava_text.grid_remove() # teksti ära kustutamine
 
@@ -120,7 +144,7 @@ def kuva_graafika():
     # Sugu
     sugu_label = ttk.Label(aken, text="Sugu:")
     sugu_label.grid(row=1, column=0, padx=5, pady=5)
-    sugu_combo = ttk.Combobox(aken, values=["mees", "naine"])
+    sugu_combo = ttk.Combobox(aken, values=["mees", "naine"], state="readonly")
     sugu_combo.grid(row=1, column=1, padx=5, pady=5)
 
     # Kaal
@@ -139,7 +163,7 @@ def kuva_graafika():
     aktiivsus_label = ttk.Label(aken, text="Aktiivsus:")
     aktiivsus_label.grid(row=4, column=0, padx=5, pady=5)
     aktiivsus_combo = ttk.Combobox(
-        aken, values=["istuv", "väike", "mõõdukas", "kõrge", "väga kõrge"]
+        aken, values=["istuv", "väike", "mõõdukas", "kõrge", "väga kõrge"],state="readonly"
     )
     aktiivsus_combo.grid(row=4, column=1, padx=5, pady=5)
 
@@ -147,7 +171,7 @@ def kuva_graafika():
     eesmärk_label = ttk.Label(aken, text="Eesmärk:")
     eesmärk_label.grid(row=5, column=0, padx=5, pady=5)
     eesmärk_combo = ttk.Combobox(
-        aken, values=["kaalulangus", "kaalutõus", "kaalu säilitamine"]
+        aken, values=["kaalulangus", "kaalutõus", "kaalu säilitamine"], state="readonly"
     )
     eesmärk_combo.grid(row=5, column=1, padx=5, pady=5)
 
@@ -158,6 +182,7 @@ def kuva_graafika():
     toitumis_kava_check = ttk.Checkbutton(aken, variable=toitumis_kava_var, text="jah")
     toitumis_kava_check.grid(row=6, column=1, padx=5, pady=5)
 
+    #Arvuta nupp
     arvuta_nupp = ttk.Button(aken, text="Arvuta", command=arvuta)
     arvuta_nupp.grid(row=7, column=0, columnspan=2, padx=5, pady=5)
 
@@ -166,7 +191,8 @@ def kuva_graafika():
     tulemus_label.grid(row=8, column=0, columnspan=2, padx=5, pady=5)
 
     # Toitumiskava kuvamine
-    toitumiskava_text = tk.Text(aken, state="disabled")
+    toitumiskava_text = tk.Text(aken, state="disabled", font=("Calibri", 10))
+    
     # Alguses on tekst peidetud
     toitumiskava_text.grid(row=9, column=0, columnspan=2, padx=5, pady=5)
     toitumiskava_text.grid_remove() 
